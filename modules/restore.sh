@@ -21,6 +21,7 @@ else
 fi
 
 # Check if the devices are found
+DEVS="$(lsblk -o NAME -n -i -r)"
 if [[ -z "$DEVS" ]]; then
     echo -e "${RED}E.R02: No devices found. (lsblk empty)${NC}"
     exit 1
