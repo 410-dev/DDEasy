@@ -172,10 +172,10 @@ fi
 echo ""
 echo "Backing up $SOURCE to $TARGET/$NAMING.img.gz"
 if [[ "$*" == "--progress" ]] || [[ "$PROGRESS" == 1 ]]; then
-    sudo dd if="$SOURCE" conv=sync,noerror bs=64K | gzip -c  > "$TARGET"/"$NAMING".img.gz
+    sudo dd if="$SOURCE" conv=sync,noerror bs=64K status=progress | gzip -c  > "$TARGET"/"$NAMING".img.gz
     SUCCESS="$?"
 else
-    sudo dd if="$SOURCE" conv=sync,noerror bs=64K status=progress | gzip -c  > "$TARGET"/"$NAMING".img.gz
+    sudo dd if="$SOURCE" conv=sync,noerror bs=64K | gzip -c  > "$TARGET"/"$NAMING".img.gz
     SUCCESS="$?"
 fi
 
