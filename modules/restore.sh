@@ -92,7 +92,7 @@ else
     fi
 
     if [[ -z "$BS" ]]; then
-        BS="64k"
+        BS="512"
     fi
     echo -e -n "Enter the block size ($BS): "
     read -r BSTMP
@@ -155,10 +155,10 @@ fi
 echo ""
 echo "Restoring $SOURCE to $TARGET with block size $BS"
 if [[ "$*" == "--progress" ]] || [[ "$PROGRESS" == 1 ]]; then
-    gzip -dc "$SOURCE" | sudo dd of="$TARGET" conv=sync,noerror bs="$BS" status=progress
+    gunzip -c "$SOURCE" | sudo dd of="$TARGET" bs="$BS" status=progress
     SUCCESS="$?"
 else
-    gzip -dc "$SOURCE" | sudo dd of="$TARGET" conv=sync,noerror bs="$BS"
+    gunzip -c "$SOURCE" | sudo dd of="$TARGET" bs="$BS"
     SUCCESS="$?"
 fi
 
