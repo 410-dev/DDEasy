@@ -153,7 +153,7 @@ else
 fi
 
 echo ""
-echo "Backing up $SOURCE to $TARGET/$NAMING.img.gz"
+echo "Restoring $SOURCE to $TARGET with block size $BS"
 if [[ "$*" == "--progress" ]] || [[ "$PROGRESS" == 1 ]]; then
     gzip -dc "$SOURCE" | sudo dd of="$TARGET" conv=sync,noerror bs="$BS" status=progress
     SUCCESS="$?"
