@@ -21,7 +21,8 @@ fi
 
 # Detect the device name
 if [[ -z "$SOURCE" ]]; then
-    SOURCE="$(lsblk -no pkname $(findmnt -n / | awk '{ print $2 }'))"
+    SOURCESHORT="$(lsblk -no pkname $(findmnt -n / | awk '{ print $2 }'))"
+    SOURCE="/dev/$SOURCESHORT"
 fi
 DEVS="$(lsblk -o NAME -n -i -r)"
 
@@ -29,7 +30,7 @@ DEVS="$(lsblk -o NAME -n -i -r)"
 if [[ -z "$DEVS" ]]; then
     echo -e "${RED}E.B02: No devices found. (lsblk empty)${NC}"
     exit 1
-elif [[ -z "$(echo -e "$DEVS" | grep "$SOURCE")" ]]; then
+elif [[ -z "$(echo -e "$DEVS" | grep "$SOURCESHORT")" ]]; then
     echo -e "${RED}E.B03: Device $SOURCE not found. (source not in lsblk)${NC}"
     exit 1
 fi

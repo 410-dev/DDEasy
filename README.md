@@ -3,7 +3,7 @@ Easily backup and restore linux system
 
 ## Installation
 ```bash
-git clone https://
+git clone https://github.com/410-dev/DDEasy.git
 ```
 
 ## Usage
