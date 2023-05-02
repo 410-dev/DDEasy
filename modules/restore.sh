@@ -167,5 +167,22 @@ if [[ "$SUCCESS" != 0 ]]; then
     exit 1
 else
     echo -e "${GREEN}Restore successful.${NC}"
+    echo "Syncing..."
+    sync
+    echo -e "${GREEN}Sync successful.${NC}"
+    echo ""
+    echo -e "${RED}PLEASE READ THE FOLLOWING CAREFULLY!${NC}"
+    echo "After you've rebooted, you may see the following error: UNEXPECTED INCONSISTENCY; RUN fsck MANUALLY"
+    echo "This is normal, and you can fix it by running: fsck -y <device>"
+    echo "For example: fsck -y /dev/sda1"
+    echo ""
+    if [[ "$*" == "--reboot" ]] || [[ "$REBOOT_AFTER_RESTORE" == 1 ]]; then
+        SECONDS=60
+        for (( i=1; i<=$SECONDS; i++ )); do
+            echo -ne "Rebooting in $((SECONDS-i)) seconds...\033[0K\r"
+            sleep 1
+        done
+        reboot
+    fi
     exit 0
 fi
