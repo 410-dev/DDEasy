@@ -7,6 +7,11 @@ git clone https://github.com/410-dev/DDEasy.git
 ```
 
 ## Usage
+After cloning the git, use `cd DDEasy` to enter the cloned git directory. Then you can execute ddeasy.sh file to start action.
+To configure the program, you may use any text editor to edit config.env which is copied from config.env.default when first launch.
+To safely edit config file before first execution, you just need to copy the config.env.default to config.env to the same directory, then edit that file.
+
+Possible execution commands:
 ```bash
 ./ddeasy.sh # Interactive mode
 ./ddeasy.sh <source> <destination> <file name> --backup --nointeraction # Backup mode, no interaction
@@ -14,8 +19,28 @@ git clone https://github.com/410-dev/DDEasy.git
 ./ddeasy.sh <source> <destination> <file name> --backup --noconfirm  # Interactive backup mode, no confirmation
 ./ddeasy.sh <source> <destination> --restore --noconfirm # Interactive restore mode, no confirmation
 ```
-### Note
-It is highly recommended to use block size of 512 instead of 64k when restoring.
+### Arguments: 
+Source: the full path to source device or backup file. Ex) /dev/sda    or     /home/user/backups/my-backup.img.gz
+Destination: the full path to backup directory or device Ex) /home/user/backups    or     /dev/sda
+File name: this will be the file name of the backup.
+
+### Flags
+--noconfirm: This will not prompt confirmation message.
+--nointeraction: This will not ask any prompt during the process. This overrides --noconfirm option.
+--backup: Execute backup script
+--restore: Execute restore script
+
+In interactive mode, if the source is not specified both in command line and config.env, it will automatically detect the boot drive.
+
+Note: It is recommended to edit config.env file instead of passing values to command line arguments. 
+
+
+## Description
+This is a simple backup utility for linux that uses dd and gzip to create backup file, and uses dd and gunzip to restore backup.
+
+## Notes
+1. It is highly recommended to use block size of 512 instead of 64k when restoring.
+2. It is not possible to restore the image to smaller disk than the original disk. For example, disk with size of 128GB cannot be restored with image from 256GB disk.
 
 ## Configurations
 Edit the config.env file. The defaults are contained in config.env.default.
