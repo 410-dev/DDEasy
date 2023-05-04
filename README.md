@@ -14,6 +14,8 @@ git clone https://github.com/410-dev/DDEasy.git
 ./ddeasy.sh <source> <destination> <file name> --backup --noconfirm  # Interactive backup mode, no confirmation
 ./ddeasy.sh <source> <destination> --restore --noconfirm # Interactive restore mode, no confirmation
 ```
+### Note
+It is highly recommended to use block size of 512 instead of 64k when restoring.
 
 ## Configurations
 Edit the config.env file. The defaults are contained in config.env.default.
