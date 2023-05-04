@@ -8,8 +8,11 @@ git clone https://github.com/410-dev/DDEasy.git
 
 ## Usage
 After cloning the git, use `cd DDEasy` to enter the cloned git directory. Then you can execute ddeasy.sh file to start action.
+
 To configure the program, you may use any text editor to edit config.env which is copied from config.env.default when first launch.
+
 To safely edit config file before first execution, you just need to copy the config.env.default to config.env to the same directory, then edit that file.
+
 
 Possible execution commands:
 ```bash
