@@ -21,18 +21,29 @@ Possible execution commands:
 ```
 ### Arguments: 
 Source: the full path to source device or backup file. Ex) /dev/sda    or     /home/user/backups/my-backup.img.gz
+
 Destination: the full path to backup directory or device Ex) /home/user/backups    or     /dev/sda
+
 File name: this will be the file name of the backup.
+
 
 ### Flags
 --noconfirm: This will not prompt confirmation message.
+
 --nointeraction: This will not ask any prompt during the process. This overrides --noconfirm option.
+
 --backup: Execute backup script
+
 --restore: Execute restore script
+
 
 In interactive mode, if the source is not specified both in command line and config.env, it will automatically detect the boot drive.
 
+
+
 Note: It is recommended to edit config.env file instead of passing values to command line arguments. 
+
+
 
 
 ## Description
