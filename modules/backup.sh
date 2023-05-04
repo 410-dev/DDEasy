@@ -19,21 +19,10 @@ else
     export NOCONFIRM=0
 fi
 
-# Detect the device name
-if [[ -z "$SOURCE" ]]; then
-    SOURCESHORT="$(lsblk -no pkname $(findmnt -n / | awk '{ print $2 }'))"
-    SOURCE="/dev/$SOURCESHORT"
-fi
+
 DEVS="$(lsblk -o NAME -n -i -r)"
 
-# Check if the devices are found
-if [[ -z "$DEVS" ]]; then
-    echo -e "${RED}E.B02: No devices found. (lsblk empty)${NC}"
-    exit 1
-elif [[ -z "$(echo -e "$DEVS" | grep "$SOURCESHORT")" ]]; then
-    echo -e "${RED}E.B03: Device $SOURCE not found. (source not in lsblk)${NC}"
-    exit 1
-fi
+
 
 if [[ "$NOINTERACTION" == 1 ]]; then
     if [[ -z "$SOURCE" ]]; then
@@ -65,6 +54,11 @@ if [[ "$NOINTERACTION" == 1 ]]; then
     fi
 
 else
+    # Detect the device name
+    if [[ -z "$SOURCE" ]]; then
+        SOURCESHORT="$(lsblk -no pkname $(findmnt -n / | awk '{ print $2 }'))"
+        SOURCE="/dev/$SOURCESHORT"
+    fi
     echo -e "Available devices:"
     echo -e "$DEVS"
     echo -e -n "Enter the source device name ($SOURCE): "
@@ -137,6 +131,15 @@ else
             exit 1
         fi
     fi
+fi
+
+# Check if the devices are found
+if [[ -z "$DEVS" ]]; then
+    echo -e "${RED}E.B02: No devices found. (lsblk empty)${NC}"
+    exit 1
+elif [[ -z "$(echo -e "$DEVS" | grep "$SOURCESHORT")" ]]; then
+    echo -e "${RED}E.B03: Device $SOURCE not found. (source not in lsblk)${NC}"
+    exit 1
 fi
 
 # Check if the destination is a directory, and is in the source device
